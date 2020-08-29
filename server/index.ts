@@ -1,5 +1,4 @@
 import { GraphQLServer } from 'graphql-yoga'
-import { parseJsonText } from 'typescript'
 
 // defining the Schema
 const typeDefs : string  = `
@@ -19,8 +18,9 @@ let links : LinkType[] = [{
   url: 'www.howtographql.com',
   description: 'Fullstack tutorial for GraphQL',
 }]
-// he actual implementation of the schema - structure is identical to the schema
-const resolvers : ResolversType = {
+// the actual implementation of the schema - structure is identical to the schema
+    // TODO: I dont know how to type this
+const resolvers = {
   Query: {
     // info: () => null
     info: () => `This is the API of a Hackernews Clone`, // this is a Scalar type - a leaf in the tree
@@ -28,9 +28,12 @@ const resolvers : ResolversType = {
   },
 
   Link: {
+    /* as this is a resolver IN a resolver, it is passed 4 arguments:
+        root|parent - the result of the previous resolver,
+    */
     id: (parent : LinkType ) => parent.id,
-    description: (parent : LinkType ) => parent.description,
-    url: (parent : LinkType ) => parent.url,
+    description: (root : LinkType ) => root.description,
+    url: (parentORroot : LinkType ) => parentORroot.url,
   }
 }
 
