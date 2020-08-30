@@ -1,5 +1,5 @@
 interface LinkType {
-  id: string,
+  id: number,
   description: string,
   url: string,
 }

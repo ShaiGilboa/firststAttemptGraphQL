@@ -1,6 +1,16 @@
-schema: ./index.js
+overwrite: true
+schema: "./src/schema.graphql"
+documents: "src/**/*.graphql"
 generates:
-  ./resolvers-types.ts:
+  src/generated/graphql.tsx:
     plugins:
-      - typescript
-      - typescript-resolvers
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-resolvers"
+      - "typescript-react-apollo"
+      - "typescript-mongodb"
+      - "typescript-graphql-files-modules"
+      - "typescript-document-nodes"
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"
