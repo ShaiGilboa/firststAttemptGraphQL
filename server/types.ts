@@ -8,3 +8,6 @@ interface ResolversType {
   Query : any,
   Link: any,
 }
+interface ContextType {
+  prisma: any,
+}
