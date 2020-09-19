@@ -1,4 +1,4 @@
-const { GraphQLServer } = require('graphql-yoga');
+const { GraphQLServer, PubSub } = require('graphql-yoga');
 
 // Prisma Client exposes a CRUD API for the models in your datamodel for you to read and write in your database.
 // These methods are auto-generated based on your model definitions in schema.prisma
@@ -19,8 +19,9 @@ const resolvers = {
   Link
 }
 
-// Bundling both to create a server (from grapql-yoga) What API operation, and how to resolve them
+
 const prisma = new PrismaClient();
+const pubsub = new PubSub()
 
 const server = new GraphQLServer({
   typeDefs: './src/schema.graphql',
@@ -29,6 +30,7 @@ const server = new GraphQLServer({
     return {
       ...request,
         prisma,
+        pubsub,
     }
   }
 })
