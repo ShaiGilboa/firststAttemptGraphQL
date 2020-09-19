@@ -19,7 +19,6 @@
     "@graphql-codegen/typescript-graphql-files-modules": "1.17.8",
     "@graphql-codegen/typescript-mongodb": "1.17.8",
     "@graphql-codegen/typescript-operations": "1.17.8",
-    "@graphql-codegen/typescript-react-apollo": "1.17.8",
     "@graphql-codegen/typescript-resolvers": "1.17.8",
     "@prisma/cli": "2.5.1",
     "@types/express": "^4.17.7",

@@ -4,17 +4,19 @@ const { GraphQLServer, PubSub } = require('graphql-yoga');
 // These methods are auto-generated based on your model definitions in schema.prisma
 // to see the Prisma studio, run in terminal:
   //  npx prisma studio --experimental
-const { PrismaClient } = require('@prisma/client')
+const { PrismaClient } = require('@prisma/client');
 
 
-const Query = require('./resolvers/Query')
-const Mutation = require('./resolvers/Mutation')
-const User = require('./resolvers/User')
-const Link = require('./resolvers/Link')
+const Query = require('./resolvers/Query');
+const Mutation = require('./resolvers/Mutation');
+const User = require('./resolvers/User');
+const Link = require('./resolvers/Link');
+const Subscription = require('./resolvers/Subscription');
 
 const resolvers = {
   Query,
   Mutation,
+  Subscription,
   User,
   Link
 }
