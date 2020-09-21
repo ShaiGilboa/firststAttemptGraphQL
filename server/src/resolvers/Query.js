@@ -3,7 +3,22 @@ const feed = (parent, args, context, info) => {
 }
 
 const users = (parent, args, context, info) => {
-  return context.prisma.user.findMany()
+  const where = args.filter
+    ? {
+      OR: [
+        { description: { contains: args.filter } },
+        { url: { contains: args.filter } },
+      ],
+    }
+    : {
+
+    }
+
+  const links = await context.prisma.link.findMany({
+    where,
+  })
+  
+  return links;
 }
 
 module.exports = {
