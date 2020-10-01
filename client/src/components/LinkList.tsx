@@ -18,7 +18,7 @@ const LinkList : React.FC<PropsWithChildren<props>> = () => {
     feed {
     links {
       id
-      postedBy{
+      postedBy {
         name
       }
       description
@@ -31,13 +31,14 @@ const LinkList : React.FC<PropsWithChildren<props>> = () => {
       <Wrapper data-css='LinkList'>
     <Query query={QUERY}>
       {({ loading, error, data } : any) => {
+        // console.log('error', error)
         if (loading) return <div>loading</div>;
         if (error) return <div>Error</div>;
         console.log('data', data)
         const linksToRender : Link[] = data.feed.links;
         return (
           <ul>
-            {linksToRender.map((link: Link) => <li><LinkItem key={link.id+link.description} link={link} /></li>)}
+            {linksToRender.map((link: Link) => <li key={link.id+link.description}><LinkItem  link={link} /></li>)}
           </ul>
         )
       }}

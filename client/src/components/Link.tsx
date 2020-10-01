@@ -13,6 +13,7 @@ const LinkItem : React.FC<PropsWithChildren<props>> = ({ link }) => {
     <Wrapper data-css='Link'>
       <p>url: {link.url}</p>
       <p>description: {link.description}</p>
+      <p>name: {link.postedBy ? link.postedBy.name : 'anonymous'} </p>
     </Wrapper>
   )
 }
@@ -20,5 +21,6 @@ const LinkItem : React.FC<PropsWithChildren<props>> = ({ link }) => {
 export default LinkItem;
 
 const Wrapper = styled.div`
-
+  border: 1px solid red;
+  margin: 3px;
 `;    
