@@ -1,6 +1,11 @@
 import React, { PropsWithChildren } from 'react';
 import styled from 'styled-components';
-import Link from './Link';
+
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
+
+import LinkItem from './Link';
+import { Link } from '../types';
 
 interface props {
   style?: React.CSSProperties,
@@ -8,22 +13,36 @@ interface props {
 };
 
 const LinkList : React.FC<PropsWithChildren<props>> = () => {
-
+  const QUERY = gql`
+  {
+    feed {
+    links {
+      id
+      postedBy{
+        name
+      }
+      description
+      url
+    }
+  }
+  }
+  `
   return (
-    <Wrapper data-css='LinkList'>
-      <ol>
-        {[{
-        id: '1',
-        description: 'Prisma turns your database into a GraphQL API 😎',
-        url: 'https://www.prismagraphql.com',
-      },
-      {
-        id: '2',
-        description: 'The best GraphQL client',
-        url: 'https://www.apollographql.com/docs/react/',
-      },].map(link => <li><Link link={link}></Link></li>)}
-      </ol>
-    </Wrapper>
+      <Wrapper data-css='LinkList'>
+    <Query query={QUERY}>
+      {({ loading, error, data } : any) => {
+        if (loading) return <div>loading</div>;
+        if (error) return <div>Error</div>;
+        console.log('data', data)
+        const linksToRender : Link[] = data.feed.links;
+        return (
+          <ul>
+            {linksToRender.map((link: Link) => <li><LinkItem key={link.id+link.description} link={link} /></li>)}
+          </ul>
+        )
+      }}
+    </Query>
+      </Wrapper>
   )
 }
 
